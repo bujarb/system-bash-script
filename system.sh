@@ -40,7 +40,7 @@ echo $system_password | sudo -S apt-get install apache2 -y
 echo $system_password | sudo mkdir /www
 echo $system_password | sudo mkdir /www/html
 echo $system_password | sudo touch index.html
-echo $system_password | echo "localhost" >> index.html
+echo "localhost" >> index.html
 echo $system_password | sudo chmod 777 -R /www/html
 echo $system_password | sudo -S rm -rf /etc/apache/apache2.conf
 echo $system_password | sudo -S rm -rf /etc/apache/sites-available/000-default.conf
