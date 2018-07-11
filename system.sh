@@ -26,6 +26,8 @@ distro="${Array[1]}"
 if [ $distro == "debian" ]
 then
   # Install commands go here
+  echo $system_password | su
+  apt-get install sudo -y
 fi
 
 # Update and Upgrade system
@@ -39,8 +41,8 @@ echo $system_password | sudo mkdir /www
 echo $system_password | sudo mkdir /www/html
 echo $system_password | sudo chmod 777 -R /www/html
 echo $system_password | sudo -S rm -rf /etc/apache/apache2.conf
-echo $system_password | sudo -S cp apache2.conf /etc/apache2
-echo $system_password | sudo -S cp 000-default.conf /etc/apache2/sites-available
+echo $system_password | sudo -S cp config_files/apache2.conf /etc/apache2
+echo $system_password | sudo -S cp config_files/000-default.conf /etc/apache2/sites-available
 echo $system_password | sudo a2enmod rewrite
 echo $system_password | sudo systemctl restart apache2
 
