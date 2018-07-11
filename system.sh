@@ -12,7 +12,7 @@ Yellow='\033[0;33m'       # Yellow
 Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 
-system_password="bujphp12"; # Your system $system_password goes here
+system_password="insert password here"; # Your system $system_password goes here
 php_version="7.2"; # PHP Version
 script_dir=`pwd`; #file directory
 
