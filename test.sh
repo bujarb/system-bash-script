@@ -1,5 +1,13 @@
-#! /bin/sh
+# /bin/
 
-sys_pass="bujphp12";
+echo "Finding Debian/ Ubuntu Codename..."
 
-echo $sys_pass | sudo -S apt-get update
+CODENAME=`cat /etc/*-release | grep -w "ID"`
+
+set -- "$CODENAME"
+IFS="="; declare -a Array=($*)
+distro="${Array[1]}"
+if [ $distro == "debian" ]
+then
+echo $distro
+fi

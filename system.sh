@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# This is a Bash script to install all the things I need in order to start working on my PC
+# Type "bash system.sh" to execute this script
+
 Color_Off='\033[0m'       # Text Reset
 
 # Regular Colors
@@ -11,6 +14,19 @@ Cyan='\033[0;36m'         # Cyan
 
 system_password="bujphp12"; # Your system $system_password goes here
 php_version="7.2"; # PHP Version
+script_dir=`pwd`; #file directory
+
+# Find if system is Debian or Ubuntu to install somethings
+CODENAME=`cat /etc/*-release | grep -w "ID"`
+
+set -- "$CODENAME"
+IFS="="; declare -a Array=($*)
+distro="${Array[1]}"
+
+if [ $distro == "debian" ]
+then
+  # Install commands go here
+fi
 
 # Update and Upgrade system
 echo -e "$Cyan \n Updating system... $Color_Off"
@@ -48,5 +64,25 @@ unzip phpMyAdmin-4.8.2-all-languages.zip
 mkdir phpmyadmin
 cd phpMyAdmin-4.8.2-all-languages
 mv * ../phpmyadmin
+cd ..
 rm -rf phpMyAdmin-4.8.2-all-languages
 echo $system_password | sudo mv phpmyadmin /www/html
+cd $script_dir;
+
+#Install PHPStorm
+cd ~/Downloads
+wget https://download.jetbrains.com/webide/PhpStorm-2018.1.6.tar.gz
+echo $system_password | sudo -S tar -zxvf PhpStorm-2018.1.6.tar.gz /opt
+
+#Install Atom
+wget https://atom.io/download/deb
+echo $system_password | sudo -S dpkg -i deb
+
+#Install Postman
+wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
+echo $system_password | sudo -S tar -zxvf postman.tar.gz
+echo $system_password | sudo -S mv Postman /opt
+echo $system_password | sudo -S cp config_files/postman.desktop ~/.local/share/applications
+
+#Reboot the system
+echo $system_password | sudo -S reboot
