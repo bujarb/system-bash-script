@@ -39,8 +39,11 @@ echo -e "$Cyan \n Installing Apache Web Server... $Color_Off"
 echo $system_password | sudo -S apt-get install apache2 -y
 echo $system_password | sudo mkdir /www
 echo $system_password | sudo mkdir /www/html
+echo $system_password | sudo touch index.html
+echo $system_password | echo "localhost" >> index.html
 echo $system_password | sudo chmod 777 -R /www/html
 echo $system_password | sudo -S rm -rf /etc/apache/apache2.conf
+echo $system_password | sudo -S rm -rf /etc/apache/sites-available/000-default.conf
 echo $system_password | sudo -S cp config_files/apache2.conf /etc/apache2
 echo $system_password | sudo -S cp config_files/000-default.conf /etc/apache2/sites-available
 echo $system_password | sudo a2enmod rewrite
@@ -69,6 +72,7 @@ mv * ../phpmyadmin
 cd ..
 rm -rf phpMyAdmin-4.8.2-all-languages
 echo $system_password | sudo mv phpmyadmin /www/html
+echo $system_password | sudo systemctl restart apache2
 cd $script_dir;
 
 #Install PHPStorm
